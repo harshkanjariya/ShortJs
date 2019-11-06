@@ -81,7 +81,7 @@ function abs(x){return Math.abs(x);}
 function floor(x){return Math.floor(x);}
 function ceil(x){return Math.ceil(x);}
 
-var harsh,interval,strk=true,fll=true,width,height,mouse={x:100,y:100};
+var harsh,myinterval,strk=true,fll=true,width,height,mouse={x:100,y:100};
 var clrmod='rgb';
 var docwidth=-1;
 var docheight=-1;
@@ -92,23 +92,34 @@ function resizing(){
   if(defaultscreen){
     harsh.canvas.width=width=window.innerWidth;
     harsh.canvas.height=height=window.innerHeight;
-    harsh.canvas.style.marginLeft='-8px';
-    harsh.canvas.style.marginTop='-8px';
   }
 };
-document.onmousemove=function(e){mouse.x=e.clientX;mouse.y=e.clientY};
+document.onmousemove=function(e){mouse.x=e.clientX-harsh.canvas.getBoundingClientRect().left;mouse.y=e.clientY-harsh.canvas.getBoundingClientRect().top};
 function createCanvas(wt=docwidth,ht=docheight){
   if(wt===docwidth&&ht===docheight)defaultscreen=true;
+  if (typeof(wt)=="object")
+    wt.innerHTML='<canvas id="harshcanvas"/>'
+  else
   document.write('<canvas id="harshcanvas"/>');
   harsh=document.getElementById('harshcanvas').getContext('2d');
-  harsh.canvas.width=wt;
-  harsh.canvas.height=ht;
+  if (typeof(wt)=="object"){
+    harsh.canvas.width=wt.offsetWidth;
+    harsh.canvas.height=wt.offsetHeight;
+  }else{
+    harsh.canvas.width=wt;
+    harsh.canvas.height=ht;
+  }
   width=harsh.canvas.width;
   height=harsh.canvas.height;
   if(wt==-1&&ht==-1)resizing();
-  interval=setInterval(draw,100);
   fill(0);
   stroke(0);
+}
+window.onload=function(){
+  myinterval=setInterval(draw,100);
+  clearInterval(16);
+  setTime(30);
+  console.log(myinterval);
 }
 function hsbToRgb(hsb){
   var rgb = { };
@@ -145,10 +156,13 @@ function Text(s,x,y){
   else harsh.strokeText(s,x,y);}
 function clear(x=-width*500,y=-height*500,w=width*1000,h=height*1000){harsh.clearRect(x,y,w,h);}
 function setTime(t){
-  clearInterval(interval);
-  interval=setInterval(draw,t);
+  stop();
+  myinterval=setInterval(draw,t);
 }
-function stop(){clearInterval(interval);}
+function stop(){
+  for (var i = 1; i <=myinterval; i++)
+  clearInterval(i);
+}
 function circle(xx,yy,rr){
   harsh.beginPath();
   harsh.arc(xx,yy,rr,0,Math.PI*2,true);
