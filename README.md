@@ -3,7 +3,7 @@
 **Functions**
 
 1. createCanvas()
-   - ![#f6f8fa](creates canvas for full screen.)
+   - - ![#f6f8fa](creates canvas for full screen.) `#f6f8fa`
 
 2. createCanvas(divElement)
    - creates canvas inside div element.
