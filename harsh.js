@@ -81,7 +81,7 @@ function abs(x){return Math.abs(x);}
 function floor(x){return Math.floor(x);}
 function ceil(x){return Math.ceil(x);}
 
-var harsh,myinterval,strk=true,fll=true,width,height,mouse={x:100,y:100};
+var harsh,frameRate=100,strk=true,fll=true,width,height,mouse={x:100,y:100};
 var clrmod='rgb';
 var docwidth=-1;
 var docheight=-1;
@@ -116,10 +116,11 @@ function createCanvas(wt=docwidth,ht=docheight){
   stroke(0);
 }
 window.onload=function(){
-  myinterval=setInterval(draw,100);
-  clearInterval(16);
-  setTime(30);
-  console.log(myinterval);
+	originalFrame();
+}
+function originalFrame(){
+	draw();
+	setTimeout(originalFrame,frameRate);
 }
 function hsbToRgb(hsb){
   var rgb = { };
@@ -156,12 +157,7 @@ function Text(s,x,y){
   else harsh.strokeText(s,x,y);}
 function clear(x=-width*500,y=-height*500,w=width*1000,h=height*1000){harsh.clearRect(x,y,w,h);}
 function setTime(t){
-  stop();
-  myinterval=setInterval(draw,t);
-}
-function stop(){
-  for (var i = 1; i <=myinterval; i++)
-  clearInterval(i);
+	frameRate=1000/t;
 }
 function circle(xx,yy,rr){
   harsh.beginPath();
