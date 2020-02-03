@@ -2,11 +2,9 @@
 
 **Functions**
 
-1. createCanvas()
-   - `creates canvas for full screen.`
+1. createCanvas() `-> creates canvas for full screen.`
 
-2. createCanvas(divElement)
-   `- creates canvas inside div element.`
+2. createCanvas(divElement) `-> creates canvas inside div element.`
 
 3. createCanvas(width,height)
    - creates canvas with give integer width and height.
