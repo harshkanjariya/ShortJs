@@ -135,7 +135,7 @@ function World(g,t){
 					if (o instanceof Ball){
 						if (e instanceof Block){
 							var p=e.points();
-							var data=detectCircleLine(o.x,o.y,o.radius,o.vx,o.vy,e.x-e.width/2,e.y-1-e.height/2,e.x+e.width/2,e.y-e.height/2);
+							var data=detectCircleLine(o.x,o.y,o.radius,o.vx,o.vy,e.x-e.width/2,e.y-5-e.height/2,e.x+e.width/2,e.y-e.height/2);
 							if (data){
 								o.vx=data[0];
 								o.vy=data[1];
