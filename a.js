@@ -157,7 +157,9 @@ function Ball(x,y,r){
 	this.vx=0;
 	this.vy=0;
 	this.radius=r;
+	this.color="red";
 	this.show=function(){
+		fill(this.color);
 		circle(this.x,this.y,this.radius);
 	}
 }
@@ -168,6 +170,7 @@ function Block(x,y,w,h,option){
 	this.height=h;
 	this.vx=0;
 	this.vy=0;
+	this.color="green";
 	if (option && option.static){
 		this.static=option.static;
 	}
@@ -178,6 +181,7 @@ function Block(x,y,w,h,option){
 		{x:this.x-this.width/2,y:this.y+this.height/2}];
 	}
 	this.show=function(){
+		fill(this.color);
 		rect(this.x-this.width/2,this.y-this.height/2,this.width,this.height);
 	}
 }
